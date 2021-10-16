@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_clean_architecture/config/config.dart';
 import 'di.dart';
 
 void main()async{
@@ -13,9 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        platform: TargetPlatform.iOS
-      ),
+      theme: AppTheme.lightTheme
     );
   }
 }
