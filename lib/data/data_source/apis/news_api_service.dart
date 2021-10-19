@@ -10,10 +10,10 @@ abstract class NewsApiService {
 
   @GET(BaseUrl.newsBreaking)
   Future<HttpResponse<BreakingNewsResponseModel>> getBreakingNewsArticles(
-    @Query(ApiParam.apiKey) String apiKey,
-    @Query(ApiParam.country) String country,
-    @Query(ApiParam.category) String category,
-    @Query(ApiParam.page) int page,
-    @Query(ApiParam.pageSize) int pageSize,
+    @Query(Types.apiKey) String apiKey,
+    @Query(Types.country) String country,
+    @Query(Types.category) String category,
+    @Query(Types.page) int page,
+    @Query(Types.pageSize) int pageSize,
   );
 }

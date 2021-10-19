@@ -17,11 +17,11 @@ extension AnimationExtension on AnimationController {
 }
 
 extension ContextExtension on BuildContext {
-  void showModalBottom(Widget child) {
+  void showModalBottom({required Widget child}) {
     showModalBottomSheet(context: this, builder: (context) => child);
   }
 
-  void showModalDialog(Widget child){
+  void showModalDialog({required Widget child}){
     showDialog(context: this, builder: (context) => child);
   }
 

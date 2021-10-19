@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_architecture/ui/ui.dart';
 import 'package:get/get.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
-  static const init = AppRoutes.login;
+  static const init = AppRoutes.home;
 
   static final routes = [
     GetPage(
@@ -14,7 +15,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.home,
-      page: () => Container(),
+      page: () => const HomePage(),
       transition: Transition.leftToRight,
     ),
     GetPage(

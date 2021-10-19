@@ -2,18 +2,20 @@ import 'package:flutter_clean_architecture/domain/domain.dart';
 
 class ArticleModel extends Article {
   const ArticleModel({
-    required int id,
+    int ?id,
     String? title,
     String? content,
     String? url,
     String? urlImage,
-    DateTime? publishAt,
+    String ? description,
+    String? publishAt,
   }) : super(
           id: id,
           url: url,
           title: title,
           content: content,
           urlImage: urlImage,
+          description: description,
           publishAt: publishAt,
         );
 
@@ -22,7 +24,8 @@ class ArticleModel extends Article {
         title: json['title'],
         content: json['content'],
         publishAt: json['publishedAt'],
-        urlImage: json['urlToimage'],
+        description: json['description'],
+        urlImage: json['urlToImage'],
         url: json['url'],
       );
 }
