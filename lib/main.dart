@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/config/config.dart';
-import 'di.dart';
+import 'package:flutter_clean_architecture/app_config.dart';
+import 'config/theme/theme.dart' show AppTheme;
 
 void main()async{
   WidgetsFlutterBinding.ensureInitialized();
-  AppInjector();
+  await AppConfig.instance;
  runApp(const MyApp());
 }
 class MyApp extends StatelessWidget {

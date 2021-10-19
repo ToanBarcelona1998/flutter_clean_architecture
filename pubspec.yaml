@@ -35,14 +35,17 @@ dependencies:
   #local database
   hive: ^2.0.4
 
+  #get x
+  get: ^4.3.8
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^1.0.0
-
   #tool
   build_runner: ^2.1.4
+  retrofit_generator: ^2.0.1+2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
