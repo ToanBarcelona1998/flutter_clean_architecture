@@ -1,5 +1,4 @@
 import 'article_model.dart';
-
 class BreakingNewsResponseModel {
   final String status;
   final int totalResults;

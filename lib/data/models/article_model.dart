@@ -2,7 +2,6 @@ import 'package:flutter_clean_architecture/domain/domain.dart';
 
 class ArticleModel extends Article {
   const ArticleModel({
-    int ?id,
     String? title,
     String? content,
     String? url,
@@ -10,7 +9,6 @@ class ArticleModel extends Article {
     String ? description,
     String? publishAt,
   }) : super(
-          id: id,
           url: url,
           title: title,
           content: content,
@@ -20,7 +18,6 @@ class ArticleModel extends Article {
         );
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) => ArticleModel(
-        id: json['id'],
         title: json['title'],
         content: json['content'],
         publishAt: json['publishedAt'],

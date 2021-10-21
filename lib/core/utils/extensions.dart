@@ -9,7 +9,6 @@ extension StringExtension on String {
 
   String get assetsEnv => BaseUrl.assetEnv;
 }
-
 extension AnimationExtension on AnimationController {
   Animation<T> curvedTweenAnimation<T>({T? begin, T? end}) {
     return Tween<T>(begin: begin, end: end).animate(CurvedAnimation(parent: this, curve: Curves.easeOut));
@@ -22,7 +21,7 @@ extension ContextExtension on BuildContext {
   }
 
   void showModalDialog({required Widget child}){
-    showDialog(context: this, builder: (context) => child);
+    showDialog(barrierDismissible: false,context: this, builder: (context) => child);
   }
 
   Size get screenSize => MediaQuery.of(this).size;

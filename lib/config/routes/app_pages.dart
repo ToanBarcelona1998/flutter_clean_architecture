@@ -23,5 +23,10 @@ class AppPages {
       page: () => Container(),
       transition: Transition.leftToRight,
     ),
+    GetPage(
+      name: AppRoutes.local,
+      page: () => LocalPage(),
+      transition: Transition.leftToRight,
+    ),
   ];
 }

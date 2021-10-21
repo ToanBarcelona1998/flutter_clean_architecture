@@ -18,11 +18,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ArticleBloc>(
-      create: (_) => getIt()
-        ..add(
-          const GetArticleEvent(isLoadMore: false),
-        ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ArticleBloc>(
+          create: (_) =>
+          getIt()
+            ..add(
+              const GetArticleEvent(isLoadMore: false),
+            ),),
+        BlocProvider<ArticleLocalBloc>(
+          create: (_) =>
+          getIt(),),
+      ],
       child: GetMaterialApp(
         getPages: AppPages.routes,
         initialRoute: AppPages.init,

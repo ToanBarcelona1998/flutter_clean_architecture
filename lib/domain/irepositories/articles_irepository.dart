@@ -4,7 +4,7 @@ import 'package:flutter_clean_architecture/domain/domain.dart';
 abstract class ArticlesIRepository{
   Future<DataState<List<Article>>> getBreakingNewsArticle({required Map<String,dynamic> param});
 
-  Future<List<Article>> getLocalArticle();
+  Future<List<Article>> getLocalArticle({required List<int> param});
 
   Future<void> saveArticle(Article article);
 

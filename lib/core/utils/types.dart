@@ -6,8 +6,8 @@ class Types{
   static const String apiKeyArticle = 'API_KEY';
 
   //hive key
-  static const String hiveKeyArticle = 'article';
-  static const String hiveKeyUser = 'user';
+  static const String articleBox = 'article';
+
 
   //article param
   static const apiKey= 'apiKey';
