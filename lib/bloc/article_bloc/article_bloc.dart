@@ -9,7 +9,7 @@ part 'article_event.dart';
 part 'article_state.dart';
 
 class ArticleBloc extends Bloc<ArticleEvent,ArticleState> with HandleError{
-  ArticleBloc(this._useCase , this._saveArticleUseCase) : super(const ArticleStateLoading(isLoadMore: false)){
+  ArticleBloc(this._useCase , this._saveArticleUseCase) : super(ArticleStateLoading(isLoadMore: false)){
     on<GetArticleEvent>(_onGetArticle);
   }
   final GetArticleUseCase _useCase;
@@ -58,8 +58,12 @@ class ArticleBloc extends Bloc<ArticleEvent,ArticleState> with HandleError{
 
   static ArticleBloc of(context) => BlocProvider.of<ArticleBloc>(context);
 
-  static void dispose(){
-
+  void dispose(){
+    _page=1;
+    _mapArticle.clear();
+    state.listArticle = null;
+    state.isLoadMore=false;
+    state.error=null;
   }
 
 }

@@ -36,6 +36,11 @@ class ArticleLocalBloc extends Bloc<ArticleLocalEvent, ArticleLocalState> {
   }
 
   Future<void> _onRemoveLocalArticle(RemoveLocalArticleEvent event , Emitter emit)async{
+    await _removeArticleUseCase.call(param: event.article);
+
+    _mapArticle.removeWhere((key, value) => value == event.article);
+
+    emit(ArticleLocalStateDone(listArticle: _mapArticle.values.toList()));
 
   }
 

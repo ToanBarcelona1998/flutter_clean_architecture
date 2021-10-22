@@ -14,8 +14,13 @@ class LocalPage extends StatefulWidget {
 
 class _LocalPageState extends State<LocalPage> {
   late ScrollController _controller;
-
   late ArticleLocalBloc _articleBloc;
+
+  late int _indexItemSelect=-1;
+
+  // bool _decisionShow = false, _isShow = false;
+
+  double _offsetItem = 0.0 , _offsetStart = 0.0 , _offsetUpdate = 0.0;
 
   @override
   void initState() {
@@ -64,65 +69,28 @@ class _LocalPageState extends State<LocalPage> {
                   return Container(
                     padding: const EdgeInsetsDirectional.only(start: 14, end: 14, bottom: 7, top: 7),
                     height: context.screenSize.width / 2.2,
-                    child: Row(
+                    child: Stack(
                       children: [
-                        Padding(
-                          padding: const EdgeInsetsDirectional.only(end: 14),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),
+                        Positioned(
+                          right: 0,
+                          child: GestureDetector(
+                            onTap: () => _articleBloc.add(
+                              RemoveLocalArticleEvent(article: state.listArticle![index]),
+                            ),
                             child: Container(
-                              width: context.screenSize.width / 3,
                               height: double.maxFinite,
-                              decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.08),
+                              width: 100,
+                              decoration: const BoxDecoration(
+                                color: AppTheme.checkColor,
                               ),
-                              child: Image.network(
-                                state.listArticle?[index].urlImage ?? BaseUrl.errorImage,
-                                fit: BoxFit.cover,
-                                errorBuilder: (_, __, ___) {
-                                  return Image.asset(imageOOPS.assetImage);
-                                },
+                              child: const Icon(
+                                Icons.delete,
+                                color: AppTheme.whiteColor,
                               ),
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 7),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  state.listArticle?[index].title ?? '',
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: Theme.of(context).textTheme.caption,
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 4),
-                                    child: Text(
-                                      state.listArticle?[index].description ?? '',
-                                      maxLines: 2,
-                                      style: Theme.of(context).textTheme.bodyText2,
-                                    ),
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    const Icon(Icons.timelapse_outlined, size: 16),
-                                    const SizedBox(width: 4),
-                                    Text(
-                                      state.listArticle?[index].publishAt.toString() ?? '',
-                                      style: Theme.of(context).textTheme.subtitle2,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        customItem(index, state),
                       ],
                     ),
                   );
@@ -141,6 +109,107 @@ class _LocalPageState extends State<LocalPage> {
             ],
           );
         },
+      ),
+    );
+  }
+
+  Widget customItem(index ,state){
+    return Transform.translate(
+      offset: Offset(_indexItemSelect == index ? _offsetItem : 0, 0),
+      child: GestureDetector(
+        onHorizontalDragUpdate: (details) {
+          _offsetStart = details.localPosition.dx;
+          setState(() {
+
+          });
+        },
+        onHorizontalDragStart: (details) {
+          _indexItemSelect = index;
+          _offsetUpdate = details.localPosition.dx;
+
+          if(_offsetStart - _offsetUpdate >0 && _offsetStart - _offsetUpdate < 80){
+              _offsetItem = _offsetUpdate - _offsetStart;
+          }
+          if(_offsetStart - _offsetUpdate <0 && _offsetStart - _offsetUpdate > 80){
+            _offsetItem = -80 + (_offsetUpdate - _offsetStart);
+          }
+          if(_offsetStart - _offsetUpdate > 80){
+            _offsetItem = _offsetUpdate - _offsetStart + 80;
+          }
+          if(_offsetStart - _offsetItem >0){
+            _offsetItem = _offsetUpdate - _offsetStart;
+          }
+          setState(() {
+
+          });
+        },
+        onHorizontalDragEnd: (details) {
+          _offsetItem = -80;
+          setState(() {
+
+          });
+        },
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsetsDirectional.only(end: 14),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20.0),
+                child: Container(
+                  width: context.screenSize.width / 3,
+                  height: double.maxFinite,
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.08),
+                  ),
+                  child: Image.network(
+                    state.listArticle?[index].urlImage ?? BaseUrl.errorImage,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) {
+                      return Image.asset(imageOOPS.assetImage);
+                    },
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 7),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      state.listArticle?[index].title ?? '',
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: Text(
+                          state.listArticle?[index].description ?? '',
+                          maxLines: 2,
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        const Icon(Icons.timelapse_outlined, size: 16),
+                        const SizedBox(width: 4),
+                        Text(
+                          state.listArticle?[index].publishAt.toString() ?? '',
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

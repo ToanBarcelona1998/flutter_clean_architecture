@@ -8,11 +8,11 @@ class NewsLocalService{
   Future<void> saveArticle(Article articleModel)async{
     _box = await Hive.openBox(Types.articleBox);
 
-    if(_box.containsKey(articleModel.title?.substring(0,10))){
+    if(_box.containsKey(articleModel.title?.substring(0,4) ?? '${articleModel.urlImage?.substring(0,4)}')){
       return;
     }
 
-    await _box.put(articleModel.title?.substring(0,10),articleModel);
+    await _box.put(articleModel.title?.substring(0,4) ?? '${articleModel.urlImage?.substring(0,4)}',articleModel);
 
     await _box.close();
 
@@ -37,7 +37,7 @@ class NewsLocalService{
   Future<void> removeArticle(Article articleModel)async{
     _box = await Hive.openBox(Types.articleBox);
 
-    await _box.delete(articleModel.description);
+    await _box.delete(articleModel.title?.substring(0,4) ?? '${articleModel.urlImage?.substring(0,4)}');
 
     await _box.close();
   }
@@ -50,7 +50,6 @@ class NewsLocalService{
     await _box.put(articleModel.description, articleModel);
 
     await _box.close();
-
   }
 
 }
