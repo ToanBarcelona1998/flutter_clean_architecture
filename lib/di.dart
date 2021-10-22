@@ -11,7 +11,6 @@ GetIt getIt = GetIt.instance;
 
 // register dependency here
 Future<void> init() async {
-  //get token here
   getIt.registerSingleton<Dio>(Dio(BaseOptions(
       baseUrl: dotenv.env[Types.domainArticle].toString(), connectTimeout: connectTimeout, receiveTimeout: receivedTimeout,),),);
   getIt.registerSingleton<NewsApiService>(NewsApiService(getIt()));
