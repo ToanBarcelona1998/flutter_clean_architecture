@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_clean_architecture/core/core.dart';
 import 'package:flutter_clean_architecture/data/data.dart';
+import 'package:flutter_clean_architecture/utils/utils.dart';
 import 'package:retrofit/retrofit.dart';
 part 'news_api_service.g.dart';
 

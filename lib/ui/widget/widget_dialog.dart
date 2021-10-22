@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/config/config.dart' show Navigate;
-import 'package:flutter_clean_architecture/core/core.dart' show ContextExtension, Message;
+import 'package:flutter_clean_architecture/utils/utils.dart' show Message , ContextExtension;
 
 ///[WidgetDialog] là widget dùng chung cho việc show các thông báo
 

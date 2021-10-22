@@ -1,4 +1,4 @@
-import 'package:flutter_clean_architecture/core/core.dart';
+import 'package:flutter_clean_architecture/utils/constant/base_url.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'di.dart' as di;
 import 'hive_local.dart';

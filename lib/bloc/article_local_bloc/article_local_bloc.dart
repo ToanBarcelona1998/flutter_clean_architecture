@@ -31,8 +31,7 @@ class ArticleLocalBloc extends Bloc<ArticleLocalEvent, ArticleLocalState> {
     for(Article article in result){
       _mapArticle[article.title!] = article;
     }
-
-    emit(ArticleLocalStateDone(listArticle: _mapArticle.values.toList()));
+    emit(ArticleLocalStateDone(listArticle: _mapArticle.isEmpty? [] : _mapArticle.values.toList()));
   }
 
   Future<void> _onRemoveLocalArticle(RemoveLocalArticleEvent event , Emitter emit)async{
@@ -48,7 +47,7 @@ class ArticleLocalBloc extends Bloc<ArticleLocalEvent, ArticleLocalState> {
 
   void dispose(){
     _page=1;
-    state.listArticle= null;
+    state.listArticle!.clear();
     state.isLoadMore=false;
     _mapArticle.clear();
   }

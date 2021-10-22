@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_architecture/bloc/bloc.dart';
-import 'package:flutter_clean_architecture/config/config.dart';
-import 'package:flutter_clean_architecture/core/core.dart';
-import 'package:flutter_clean_architecture/ui/ui.dart';
+import 'package:flutter_clean_architecture/config/config.dart' show AppTheme, Navigate;
+import 'package:flutter_clean_architecture/ui/ui.dart' show WidgetDialog;
+import 'package:flutter_clean_architecture/utils/utils.dart'
+    show Message, ContextExtension, BaseUrl, imageOOPS, StringExtension;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -50,7 +51,7 @@ class _HomePageState extends State<HomePage> {
         },
         child: BlocBuilder<ArticleBloc, ArticleState>(
           buildWhen: (previous, current) {
-            if (previous == current) {
+            if (previous.props == current.props) {
               return false;
             }
             return true;

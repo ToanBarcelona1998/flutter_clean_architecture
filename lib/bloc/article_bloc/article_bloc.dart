@@ -2,7 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_architecture/core/core.dart';
 import 'package:flutter_clean_architecture/domain/domain.dart';
-import 'package:flutter_clean_architecture/handle_error.dart';
+import 'package:flutter_clean_architecture/utils/helper/handle_error.dart';
+import 'package:flutter_clean_architecture/utils/utils.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 part 'article_event.dart';

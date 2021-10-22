@@ -6,6 +6,7 @@ class Message{
 
 
   static const String localTitle= 'Cục bộ!';
+  static const String emptyLocal= 'Bạn chưa có bài viết nào!';
 
   //dialog
   static const String ok= 'Đồng ý';

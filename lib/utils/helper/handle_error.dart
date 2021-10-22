@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_clean_architecture/core/core.dart';
-
+import 'package:flutter_clean_architecture/utils/utils.dart' show Message;
 mixin HandleError {
   String handleError(DioError error) {
       switch (error.type) {

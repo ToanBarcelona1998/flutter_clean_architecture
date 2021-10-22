@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_clean_architecture/core/core.dart';
 import 'package:flutter_clean_architecture/data/data.dart';
 import 'package:flutter_clean_architecture/domain/domain.dart';
+import 'package:flutter_clean_architecture/utils/utils.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'bloc/bloc.dart';
