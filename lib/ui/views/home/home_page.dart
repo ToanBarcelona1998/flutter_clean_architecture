@@ -36,6 +36,7 @@ class _HomePageState extends State<HomePage> {
   void dispose() {
     _controller.removeListener(_listen);
     _controller.dispose();
+    _articleBloc.refreshState();
     super.dispose();
   }
 

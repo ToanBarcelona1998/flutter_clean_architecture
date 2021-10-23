@@ -2,12 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/config/config.dart' show Navigate;
 import 'package:flutter_clean_architecture/utils/utils.dart' show Message , ContextExtension;
 
-///[WidgetDialog] là widget dùng chung cho việc show các thông báo
+///[WidgetDialog]
 
-///[WidgetDialog.showHozDialog] là widget đẩy thông báo với các button dạng hàng ngang
-///Sử dụng nó bằng cách WidgetDialog.showHozDialog(context , title : 'example dialog' , content : 'example content' , onOk : () => null)
-//////[WidgetDialog.showVerticalDialog] là widget đẩy thông báo với các button dạng hàng ngang
-///Sử dụng nó bằng cách WidgetDialog.showVerticalDialog(context , title : 'example dialog' , content : 'example content' , onOk : () => null)
+///[WidgetDialog.showHozDialog]
+///WidgetDialog.showHozDialog(context ,
+/// title : 'example dialog' ,
+/// content : 'example content' ,
+/// onOk : () => null)
+
+
+//////[WidgetDialog.showVerticalDialog]
+///WidgetDialog.showVerticalDialog(context ,
+///title : 'example dialog' ,
+/// content : 'example content' ,
+/// onOk : () => null)
 
 class WidgetDialog extends StatelessWidget {
   const WidgetDialog(

@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_clean_architecture/core/core.dart';
 import 'package:flutter_clean_architecture/data/data.dart';
 import 'package:flutter_clean_architecture/domain/domain.dart';
+import 'package:flutter_clean_architecture/utils/utils.dart';
 class ArticleRepository implements ArticlesIRepository {
   final NewsApiService _apiService;
 
@@ -13,7 +14,7 @@ class ArticleRepository implements ArticlesIRepository {
   @override
   Future<DataState<List<Article>>> getBreakingNewsArticle({required Map<String, dynamic> param}) async {
     try {
-      final httpResponse = await _apiService.getBreakingNewsArticles(param['apiKey'], param['country'], param['category'], param['page'], param['pageSize']);
+      final httpResponse = await _apiService.getBreakingNewsArticles(param[Types.apiKey], param[Types.country], param[Types.category], param[Types.page], param[Types.pageSize]);
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(data: httpResponse.data.articles);

@@ -17,12 +17,6 @@ class _LocalPageState extends State<LocalPage> {
   late ScrollController _controller;
   late ArticleLocalBloc _articleBloc;
 
-  late int _indexItemSelect = -1;
-
-  bool _decisionShow = false, _isShow = false;
-
-  double _offsetItem = 0.0, _offsetStart = 0.0, _offsetUpdate = 0.0;
-
   @override
   void initState() {
     super.initState();
@@ -40,7 +34,7 @@ class _LocalPageState extends State<LocalPage> {
   void dispose() {
     _controller.removeListener(_listen);
     _controller.dispose();
-    _articleBloc.dispose();
+    _articleBloc.refreshState();
     super.dispose();
   }
 

@@ -1,4 +1,5 @@
-import 'package:flutter_clean_architecture/domain/domain.dart';
+import 'package:flutter_clean_architecture/domain/domain.dart' show Article;
+import 'package:flutter_clean_architecture/utils/utils.dart' show Types;
 
 class ArticleModel extends Article {
   const ArticleModel({
@@ -6,7 +7,7 @@ class ArticleModel extends Article {
     String? content,
     String? url,
     String? urlImage,
-    String ? description,
+    String? description,
     String? publishAt,
   }) : super(
           url: url,
@@ -18,11 +19,11 @@ class ArticleModel extends Article {
         );
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) => ArticleModel(
-        title: json['title'],
-        content: json['content'],
-        publishAt: json['publishedAt'],
-        description: json['description'],
-        urlImage: json['urlToImage'],
-        url: json['url'],
+        title: json[Types.title],
+        content: json[Types.content],
+        publishAt: json[Types.publishAt],
+        description: json[Types.description],
+        urlImage: json[Types.urlToImage],
+        url: json[Types.url],
       );
 }

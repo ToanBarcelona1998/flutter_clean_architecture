@@ -27,7 +27,7 @@ Future<void> init() async {
 
   getIt.registerSingleton<RemoveArticleUseCase>(RemoveArticleUseCase(getIt()));
 
-  getIt.registerFactory(() => ArticleBloc(getIt() ,getIt()));
+  getIt.registerFactory<ArticleBloc>(() => ArticleBloc(getIt() ,getIt()));
 
-  getIt.registerFactory(() => ArticleLocalBloc(getIt() ,getIt()));
+  getIt.registerFactory<ArticleLocalBloc>(() => ArticleLocalBloc(getIt() ,getIt()));
 }

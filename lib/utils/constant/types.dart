@@ -15,4 +15,18 @@ class Types{
   static const category = 'category';
   static const page = 'page';
   static const pageSize = 'pageSize';
+
+  //article key from api
+  static const title = 'title';
+  static const content = 'content';
+  static const publishAt='publishedAt';
+  static const description= 'description';
+  static const urlToImage = 'urlToImage';
+  static const url = 'url';
+
+  //breaking key from api
+  static const status = 'status';
+  static const totalResult = 'totalResults';
+  static const listArticle = 'articles';
+
 }

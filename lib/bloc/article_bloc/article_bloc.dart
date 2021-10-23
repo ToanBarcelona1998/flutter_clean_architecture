@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_clean_architecture/bloc/bloc.dart';
 import 'package:flutter_clean_architecture/core/core.dart';
 import 'package:flutter_clean_architecture/domain/domain.dart';
 import 'package:flutter_clean_architecture/utils/helper/handle_error.dart';
@@ -9,7 +10,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 part 'article_event.dart';
 part 'article_state.dart';
 
-class ArticleBloc extends Bloc<ArticleEvent,ArticleState> with HandleError{
+class ArticleBloc extends Base<ArticleEvent,ArticleState> with HandleError{
   ArticleBloc(this._useCase , this._saveArticleUseCase) : super(ArticleStateLoading(isLoadMore: false)){
     on<GetArticleEvent>(_onGetArticle);
   }
@@ -47,7 +48,7 @@ class ArticleBloc extends Bloc<ArticleEvent,ArticleState> with HandleError{
     }
 
     if(result is DataError){
-      emit(ArticleStateError(error: handleError(result.error!) ,listArticle: _oldState.listArticle ,isLoadMore: event.isLoadMore));
+      emit(ArticleStateError(error: handleDioError(result.error!) ,listArticle: _oldState.listArticle ,isLoadMore: event.isLoadMore));
 
       if(_oldState.listArticle!=null && _oldState.listArticle!.isNotEmpty){
         await Future.delayed(const Duration(seconds: 1));
@@ -55,11 +56,14 @@ class ArticleBloc extends Bloc<ArticleEvent,ArticleState> with HandleError{
         emit(ArticleStateDone(listArticle: _oldState.listArticle ?? []));
       }
     }
+
   }
 
   static ArticleBloc of(context) => BlocProvider.of<ArticleBloc>(context);
 
-  void dispose(){
+
+  @override
+  void refreshState() {
     _page=1;
     _mapArticle.clear();
     state.listArticle = null;

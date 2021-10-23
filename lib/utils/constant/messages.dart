@@ -1,6 +1,10 @@
 class Message{
   Message._();
+  
 
+  //app title
+  static const String appTitle= 'Article Application';
+  //home
   static const String homeTitle= 'Trang chủ';
   static const String homeTitleDialog= 'Cảnh báo!';
 

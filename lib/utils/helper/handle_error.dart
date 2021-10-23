@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_clean_architecture/utils/utils.dart' show Message;
 mixin HandleError {
-  String handleError(DioError error) {
+  String handleDioError(DioError error) {
       switch (error.type) {
         case DioErrorType.connectTimeout:
           return Message.errorConnectTimeout;
@@ -18,5 +18,11 @@ mixin HandleError {
         default:
           return '';
       }
+  }
+  String handleErrorApi(int type){
+    switch(type){
+      default:
+        return '';
+    }
   }
 }

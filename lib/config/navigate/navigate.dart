@@ -1,6 +1,5 @@
-import 'package:flutter_clean_architecture/config/routes/app_pages.dart';
+import 'package:flutter_clean_architecture/config/config.dart';
 import 'package:get/get.dart';
-
 class Navigate{
   Navigate._();
   static goBack() async => Get.back();

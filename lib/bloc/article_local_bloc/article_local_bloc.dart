@@ -1,11 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_clean_architecture/bloc/bloc.dart';
 import 'package:flutter_clean_architecture/domain/domain.dart';
 
 part 'article_local_event.dart';
 part 'artilce_local_state.dart';
 
-class ArticleLocalBloc extends Bloc<ArticleLocalEvent, ArticleLocalState> {
+class ArticleLocalBloc extends Base<ArticleLocalEvent, ArticleLocalState> {
   ArticleLocalBloc(this._getArticleLocalUseCase, this._removeArticleUseCase)
       : super(ArticleLocalStateLoading(isLoadMore: false)) {
     on<GetLocalArticleEvent>(_onGetLocalArticle);
@@ -45,10 +46,13 @@ class ArticleLocalBloc extends Bloc<ArticleLocalEvent, ArticleLocalState> {
 
   static ArticleLocalBloc of(context) => BlocProvider.of<ArticleLocalBloc>(context);
 
-  void dispose(){
+
+  @override
+  void refreshState() {
     _page=1;
     state.listArticle!.clear();
     state.isLoadMore=false;
     _mapArticle.clear();
   }
 }
+

@@ -1,3 +1,4 @@
+import 'package:flutter_clean_architecture/utils/utils.dart' show Types;
 import 'article_model.dart';
 class BreakingNewsResponseModel {
   final String status;
@@ -12,10 +13,10 @@ class BreakingNewsResponseModel {
 
   factory BreakingNewsResponseModel.fromJson(Map<String, dynamic> json) {
     return BreakingNewsResponseModel(
-      status: json['status'] as String,
-      totalResults: json['totalResults'] as int,
+      status: json[Types.status] as String,
+      totalResults: json[Types.totalResult] as int,
       articles: List<ArticleModel>.from(
-        (json['articles'] as List<dynamic>).map(
+        (json[Types.listArticle] as List<dynamic>).map(
               (e) => ArticleModel.fromJson(e as Map<String, dynamic>),
         ),
       ),
