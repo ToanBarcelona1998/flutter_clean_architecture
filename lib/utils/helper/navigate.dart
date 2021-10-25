@@ -5,6 +5,7 @@ class Navigate{
   static goBack() async => Get.back();
   static goLogin() async => Get.toNamed(AppRoutes.login);
   static goHome() async => Get.toNamed(AppRoutes.home);
+  static goHomeAndRemoveUtil() async => Get.off(AppRoutes.home);
   static goRegister() async => Get.toNamed(AppRoutes.register);
   static goLocal() async => Get.toNamed(AppRoutes.local);
 }

@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_architecture/bloc/bloc.dart';
-import 'package:flutter_clean_architecture/config/config.dart' show AppTheme, Navigate;
+import 'package:flutter_clean_architecture/config/config.dart' show AppTheme;
 import 'package:flutter_clean_architecture/ui/ui.dart' show WidgetDialog;
 import 'package:flutter_clean_architecture/utils/utils.dart'
-    show Message, ContextExtension, BaseUrl, imageOOPS, StringExtension;
+    show BaseUrl, ContextExtension, Message, Navigate, StringExtension, imageOOPS;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

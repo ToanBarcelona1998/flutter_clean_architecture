@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_clean_architecture/data/data.dart';
+import 'package:flutter_clean_architecture/data/repositories/user_repositoies.dart';
 import 'package:flutter_clean_architecture/domain/domain.dart';
 import 'package:flutter_clean_architecture/utils/utils.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -17,7 +18,11 @@ Future<void> init() async {
 
   getIt.registerSingleton<NewsLocalService>(NewsLocalService());
 
+  getIt.registerSingleton<UserLocalService>(UserLocalService());
+
   getIt.registerSingleton<ArticlesIRepository>(ArticleRepository(getIt() , getIt()));
+
+  getIt.registerSingleton<UserIRepositories>(UserRepositories(getIt()));
 
   getIt.registerSingleton<GetArticleUseCase>(GetArticleUseCase(getIt()));
 
@@ -27,7 +32,13 @@ Future<void> init() async {
 
   getIt.registerSingleton<RemoveArticleUseCase>(RemoveArticleUseCase(getIt()));
 
+  getIt.registerSingleton<GetTokenUseCase>(GetTokenUseCase(getIt()));
+
+  getIt.registerSingleton<SetTokenUseCase>(SetTokenUseCase(getIt()));
+
   getIt.registerFactory<ArticleBloc>(() => ArticleBloc(getIt() ,getIt()));
 
   getIt.registerFactory<ArticleLocalBloc>(() => ArticleLocalBloc(getIt() ,getIt()));
+
+  getIt.registerFactory<SplashBloc>(() => SplashBloc(getIt()));
 }

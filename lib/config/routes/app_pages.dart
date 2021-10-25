@@ -5,9 +5,14 @@ import 'package:get/get.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static const init = AppRoutes.home;
+  static const init = AppRoutes.splash;
 
   static final routes = [
+    GetPage(
+      name: AppRoutes.splash,
+      page: () => const SplashPage(),
+      transition: Transition.leftToRight,
+    ),
     GetPage(
       name: AppRoutes.login,
       page: () => Container(),
@@ -25,7 +30,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.local,
-      page: () => LocalPage(),
+      page: () => const LocalPage(),
       transition: Transition.leftToRight,
     ),
   ];

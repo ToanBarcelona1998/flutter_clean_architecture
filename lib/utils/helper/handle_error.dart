@@ -21,6 +21,8 @@ mixin HandleError {
   }
   String handleErrorApi(int type){
     switch(type){
+      case 0:
+        return '';
       default:
         return '';
     }

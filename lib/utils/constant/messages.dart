@@ -1,6 +1,7 @@
 class Message{
   Message._();
-  
+
+  static const String login = 'Đăng nhập';
 
   //app title
   static const String appTitle= 'Article Application';

@@ -39,8 +39,8 @@ class _WidgetClawState extends State<WidgetClaw> {
 
   bool _decisionShow = false, _isShow = false;
 
-  double _offsetItem = 0.0, _offsetStart = 0.0, _offsetUpdate = 0.0 , _positItemTile = 0.0;
-  final double  _widthItem = 80.0 ;
+  double _offsetItem = 0.0, _offsetStart = 0.0, _offsetUpdate = 0.0, _positItemTile = 0.0;
+  final double _widthItem = 80.0;
 
   late List<Widget> _listItem;
 
@@ -54,11 +54,11 @@ class _WidgetClawState extends State<WidgetClaw> {
   Widget build(BuildContext context) {
     for (int i = 0; i < widget._itemCount; i++) {
       Positioned positioned = Positioned(
-          right: i *  _widthItem,
+          right: i * _widthItem,
           child: GestureDetector(
             onTap: widget._listCallBack[i],
             child: Container(
-              width: widget._width?? _widthItem,
+              width: widget._width ?? _widthItem,
               height: widget._height ?? context.screenSize.width / 2.2,
               decoration: BoxDecoration(
                 color: widget._listItemColor[i],
@@ -83,10 +83,12 @@ class _WidgetClawState extends State<WidgetClaw> {
       },
       onHorizontalDragUpdate: (details) {
         _offsetUpdate = details.localPosition.dx;
-        if (_offsetStart - _offsetUpdate > 0 && _offsetStart - _offsetUpdate <  widget._itemCount * _widthItem && !_isShow) {
+        if (_offsetStart - _offsetUpdate > 0 && _offsetStart - _offsetUpdate < widget._itemCount * _widthItem && !_isShow) {
           _offsetItem = _offsetUpdate - _offsetStart;
-        } else if (_isShow && _offsetStart - _offsetUpdate < 0 && _offsetStart - _offsetUpdate > widget._itemCount * _widthItem) {
-          _offsetItem = - widget._itemCount *_widthItem + (_offsetUpdate - _offsetStart);
+        } else if (_isShow &&
+            _offsetStart - _offsetUpdate < 0 &&
+            _offsetStart - _offsetUpdate > widget._itemCount * _widthItem) {
+          _offsetItem = -widget._itemCount * _widthItem + (_offsetUpdate - _offsetStart);
         }
         if (_offsetStart - _offsetUpdate > widget._itemCount * _widthItem && !_isShow) {
           _positItemTile = _offsetUpdate - _offsetStart + widget._itemCount * _widthItem;
@@ -98,8 +100,8 @@ class _WidgetClawState extends State<WidgetClaw> {
         setState(() {});
       },
       onHorizontalDragEnd: (details) {
-        _offsetItem = _decisionShow ? - widget._itemCount* _widthItem : 0.0;
-        _positItemTile =0;
+        _offsetItem = _decisionShow ? -widget._itemCount * _widthItem : 0.0;
+        _positItemTile = 0;
         _isShow = _decisionShow;
         setState(() {});
       },
@@ -107,11 +109,14 @@ class _WidgetClawState extends State<WidgetClaw> {
         offset: Offset(
             _indexItemSelect == widget._index
                 ? _offsetItem
-                : (_decisionShow && _indexItemSelect == widget._index ? -  _widthItem : 0.0),
+                : (_decisionShow && _indexItemSelect == widget._index ? -_widthItem : 0.0),
             0.0),
         child: Container(
           color: AppTheme.whiteColor,
-          child: Transform.translate(offset: Offset(_indexItemSelect == widget._index ? _positItemTile : 0.0, 0),child: widget._child),
+          child: Transform.translate(
+            offset: Offset(_indexItemSelect == widget._index ? _positItemTile : 0.0, 0),
+            child: widget._child,
+          ),
         ),
       ),
     );

@@ -7,6 +7,10 @@ class Types{
 
   //hive key
   static const String articleBox = 'article';
+  static const String userBox = 'user';
+
+
+  static const String tokenKey = 'token';
 
 
   //article param

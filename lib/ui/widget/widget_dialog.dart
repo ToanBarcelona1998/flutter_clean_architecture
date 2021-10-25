@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/config/config.dart' show Navigate;
-import 'package:flutter_clean_architecture/utils/utils.dart' show Message , ContextExtension;
+import 'package:flutter_clean_architecture/utils/utils.dart' show ContextExtension, Message, Navigate;
 
 ///[WidgetDialog]
 

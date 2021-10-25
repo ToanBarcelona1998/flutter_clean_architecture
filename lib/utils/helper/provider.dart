@@ -21,6 +21,9 @@ class AppProvider extends StatelessWidget {
         BlocProvider<ArticleLocalBloc>(
           create: (_) => getIt(),
         ),
+        BlocProvider<SplashBloc>(
+          create: (_) => getIt()..add(const SplashEvent()),
+        )
       ],
       child: child,
     );

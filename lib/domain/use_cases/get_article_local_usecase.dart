@@ -10,5 +10,4 @@ class GetArticleLocalUseCase implements UseCase<List<Article>, List<int>>{
   Future<List<Article>> call({required List<int> param}) {
     return _repository.getLocalArticle(param: param);
   }
-
 }
