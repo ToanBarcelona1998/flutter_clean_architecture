@@ -10,7 +10,7 @@ late _WidgetButtonLoadingState _state;
 class WidgetButtonLoading extends StatefulWidget {
   final String _title;
   double? _width;
-  final LoadingValue _value;
+  LoadingValue _value;
 
   WidgetButtonLoading({required String title, double? width, LoadingValue value = LoadingValue.none, Key? key})
       : _title = title,
@@ -20,8 +20,8 @@ class WidgetButtonLoading extends StatefulWidget {
 
   static _WidgetButtonLoadingState? of(BuildContext context) => context.findAncestorRenderObjectOfType();
 
-  static void startLoading() {
-    return _state._startLoading();
+  static void startLoading() async{
+    return await _state._startLoading();
   }
 
   static void deactivateLoading(){
@@ -44,7 +44,7 @@ class _WidgetButtonLoadingState extends State<WidgetButtonLoading> with SingleTi
   void initState() {
     super.initState();
     widget._width ??= double.maxFinite;
-    _controller = AnimationController(vsync: this)..addListener(_listen);
+    _controller = AnimationController(vsync: this ,duration: const Duration(seconds: 2))..addListener(_listen);
   }
 
   @override
@@ -59,14 +59,25 @@ class _WidgetButtonLoadingState extends State<WidgetButtonLoading> with SingleTi
     setState(() {});
   }
 
-  void _startLoading() {
+  Future<void> _startLoading() async{
     if (mounted) {
       final renderBox = _buttonKey.currentContext?.findAncestorRenderObjectOfType() as RenderBox;
       _initWidth = renderBox.size.width;
+      widget._value = LoadingValue.start;
       setState(() {});
       _controller.forward();
     }
   }
+
+  Future<void> _loadingDone()async{
+    if(mounted){
+      widget._value = LoadingValue.done;
+      setState(() {
+
+      });
+    }
+  }
+
 
   void _deactivateLoading(){
     if(mounted){
@@ -93,7 +104,12 @@ class _WidgetButtonLoadingState extends State<WidgetButtonLoading> with SingleTi
                   strokeWidth: 2,
                 )
               : const Icon(Icons.check),
-      key: _buttonKey,
+      onTap: ()async{
+        await _startLoading();
+        await Future.delayed(const Duration(seconds: 3));
+        _loadingDone();
+      },
+      globalKey: _buttonKey,
     );
   }
 }

@@ -9,6 +9,7 @@ class WidgetButton extends StatelessWidget {
       EdgeInsetsGeometry? margin,
       EdgeInsetsGeometry? padding,
       VoidCallback? onTap,
+      required GlobalKey<ScaffoldState> globalKey,
       Key? key})
       : _child = child,
         _width = width,
@@ -16,6 +17,7 @@ class WidgetButton extends StatelessWidget {
         _margin = margin,
         _padding = padding,
         _onTap = onTap,
+        _globalKey = globalKey,
         super(key: key);
 
   final Widget _child;
@@ -24,11 +26,12 @@ class WidgetButton extends StatelessWidget {
   final EdgeInsetsGeometry? _margin;
   final EdgeInsetsGeometry? _padding;
   final VoidCallback? _onTap;
+  final GlobalKey<ScaffoldState> _globalKey;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      key: key,
+      key: _globalKey,
       margin: _margin ?? const EdgeInsets.all(0),
       padding: _padding ?? const EdgeInsets.all(0),
       width: _width ?? double.maxFinite,

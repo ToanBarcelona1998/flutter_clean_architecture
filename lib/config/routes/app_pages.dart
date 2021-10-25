@@ -15,7 +15,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.login,
-      page: () => Container(),
+      page: () => LoginPage(),
       transition: Transition.leftToRight,
     ),
     GetPage(
