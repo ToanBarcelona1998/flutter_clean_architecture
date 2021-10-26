@@ -9,6 +9,12 @@ class Message{
   static const String homeTitle= 'Trang chủ';
   static const String homeTitleDialog= 'Cảnh báo!';
 
+  //login
+  static const String userName = 'Tên đăng nhập';
+  static const String passWord = 'Mật khẩu';
+  static const String errUserName = 'Tên đăng nhập không đúng định dạng';
+  static const String errPassWord = 'Tên đăng nhập không được bỏ trống';
+
 
   static const String localTitle= 'Cục bộ!';
   static const String emptyLocal= 'Bạn chưa có bài viết nào!';

@@ -14,6 +14,8 @@ class AppTheme {
   static const transparentColor = Colors.transparent;
   static const buttonDelete = Color(0xffc75048);
   static const buttonEdit = Color(0xff947646);
+  static const Color hintTextFieldColor= Color(0xffBDBDBD);
+  static const Color textFieldColor = Color(0xffF0F0F0);
 
   static ThemeData get lightTheme => ThemeData(
         platform: TargetPlatform.iOS,

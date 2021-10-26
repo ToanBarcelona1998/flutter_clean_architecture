@@ -1,11 +1,15 @@
 part of 'login_bloc.dart';
 
 class LoginState extends Equatable {
-  final UserValidate? userValidate;
-  final PassValidate? passValidate;
+  final UserValidate userValidate;
+  final PassValidate passValidate;
   final FormzStatus status;
 
-  const LoginState({this.userValidate, this.passValidate, this.status = FormzStatus.pure});
+  const LoginState({
+    this.userValidate = const UserValidate.pure(),
+    this.passValidate = const PassValidate.pure(),
+    this.status = FormzStatus.pure,
+  });
 
   LoginState copyWith({
     UserValidate? userValidate,
@@ -20,5 +24,5 @@ class LoginState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [userValidate, passValidate , status];
+  List<Object?> get props => [userValidate, passValidate, status];
 }

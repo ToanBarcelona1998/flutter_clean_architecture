@@ -30,6 +30,7 @@ class WidgetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(_width);
     return Container(
       key: _globalKey,
       margin: _margin ?? const EdgeInsets.all(0),

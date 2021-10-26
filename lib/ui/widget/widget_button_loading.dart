@@ -10,21 +10,23 @@ late _WidgetButtonLoadingState _state;
 class WidgetButtonLoading extends StatefulWidget {
   final String _title;
   double? _width;
+  VoidCallback? _voidCallBack;
   LoadingValue _value;
 
-  WidgetButtonLoading({required String title, double? width, LoadingValue value = LoadingValue.none, Key? key})
+  WidgetButtonLoading(
+      {required String title, double? width, VoidCallback? voidCallback, LoadingValue value = LoadingValue.none, Key? key})
       : _title = title,
         _width = width,
+        _voidCallBack = voidCallback,
         _value = value,
         super(key: key);
-
   static _WidgetButtonLoadingState? of(BuildContext context) => context.findAncestorRenderObjectOfType();
 
-  static void startLoading() async{
+  static void startLoading() async {
     return await _state._startLoading();
   }
 
-  static void deactivateLoading(){
+  static void deactivateLoading() {
     return _state._deactivateLoading();
   }
 
@@ -43,8 +45,9 @@ class _WidgetButtonLoadingState extends State<WidgetButtonLoading> with SingleTi
   @override
   void initState() {
     super.initState();
+    _state = this;
     widget._width ??= double.maxFinite;
-    _controller = AnimationController(vsync: this ,duration: const Duration(seconds: 2))..addListener(_listen);
+    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 2))..addListener(_listen);
   }
 
   @override
@@ -59,7 +62,7 @@ class _WidgetButtonLoadingState extends State<WidgetButtonLoading> with SingleTi
     setState(() {});
   }
 
-  Future<void> _startLoading() async{
+  Future<void> _startLoading() async {
     if (mounted) {
       final renderBox = _buttonKey.currentContext?.findAncestorRenderObjectOfType() as RenderBox;
       _initWidth = renderBox.size.width;
@@ -69,26 +72,21 @@ class _WidgetButtonLoadingState extends State<WidgetButtonLoading> with SingleTi
     }
   }
 
-  Future<void> _loadingDone()async{
-    if(mounted){
+  Future<void> _loadingDone() async {
+    if (mounted) {
       widget._value = LoadingValue.done;
-      setState(() {
-
-      });
+      setState(() {});
     }
   }
 
-
-  void _deactivateLoading(){
-    if(mounted){
+  void _deactivateLoading() {
+    if (mounted) {
       _controller.reverse();
 
       _initWidth = 0.0;
 
       widget._width = double.maxFinite;
-      setState(() {
-
-      });
+      setState(() {});
     }
   }
 
@@ -104,11 +102,7 @@ class _WidgetButtonLoadingState extends State<WidgetButtonLoading> with SingleTi
                   strokeWidth: 2,
                 )
               : const Icon(Icons.check),
-      onTap: ()async{
-        await _startLoading();
-        await Future.delayed(const Duration(seconds: 3));
-        _loadingDone();
-      },
+      onTap: widget._voidCallBack,
       globalKey: _buttonKey,
     );
   }
