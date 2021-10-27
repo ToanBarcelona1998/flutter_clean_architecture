@@ -16,6 +16,7 @@ class SplashBloc extends Base<SplashEvent, SplashState>{
   void _getScreenEvent(SplashEvent event, Emitter emit)async{
     // ignore: void_checks
     String ?token = await _getTokenUseCase.call(param: '');
+
     if(token == null){
       emit(SplashState(hasToken: false));
     }else{

@@ -4,7 +4,7 @@ import 'package:flutter_clean_architecture/config/config.dart';
 class WidgetButton extends StatelessWidget {
   const WidgetButton(
       {required Widget child,
-      double? width,
+      required double width,
       Color? color,
       EdgeInsetsGeometry? margin,
       EdgeInsetsGeometry? padding,
@@ -21,7 +21,7 @@ class WidgetButton extends StatelessWidget {
         super(key: key);
 
   final Widget _child;
-  final double? _width;
+  final double _width;
   final Color? _color;
   final EdgeInsetsGeometry? _margin;
   final EdgeInsetsGeometry? _padding;
@@ -30,12 +30,11 @@ class WidgetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(_width);
     return Container(
       key: _globalKey,
       margin: _margin ?? const EdgeInsets.all(0),
       padding: _padding ?? const EdgeInsets.all(0),
-      width: _width ?? double.maxFinite,
+      width: _width,
       height: 50,
       child: ElevatedButton(
         onPressed: _onTap,

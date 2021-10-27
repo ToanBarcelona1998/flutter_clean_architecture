@@ -25,7 +25,7 @@ class AppProvider extends StatelessWidget {
           create: (_) => getIt()..add(const SplashEvent()),
         ),
         BlocProvider<LoginBloc>(
-          create: (_) => LoginBloc(),
+          create: (_) => LoginBloc(getIt()),
         ),
       ],
       child: child,

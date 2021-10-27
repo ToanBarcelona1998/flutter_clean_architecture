@@ -7,7 +7,7 @@ class UserRepositories implements UserIRepositories{
 
   @override
   Future<String?> getToken() async{
-    await _localService.getToken();
+    return await _localService.getToken();
   }
 
   @override

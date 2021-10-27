@@ -19,6 +19,11 @@ class UserLocalService{
   Future<void> setToken({required String token})async{
     _box = await Hive.openBox(Types.userBox);
 
-    return _box.put(Types.tokenKey, token);
+    _box.put(Types.tokenKey, token);
+
+
+    await _box.close();
+
+    return;
   }
 }

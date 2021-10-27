@@ -15,7 +15,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.login,
-      page: () => LoginPage(),
+      page: () => const LoginPage(),
       transition: Transition.leftToRight,
     ),
     GetPage(

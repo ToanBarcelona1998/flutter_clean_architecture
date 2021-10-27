@@ -9,27 +9,29 @@ late _WidgetButtonLoadingState _state;
 // ignore: must_be_immutable
 class WidgetButtonLoading extends StatefulWidget {
   final String _title;
-  double? _width;
+  double _width;
   VoidCallback? _voidCallBack;
-  LoadingValue _value;
+  static LoadingValue _value = LoadingValue.none;
 
   WidgetButtonLoading(
-      {required String title, double? width, VoidCallback? voidCallback, LoadingValue value = LoadingValue.none, Key? key})
+      {required String title, double? width, VoidCallback? voidCallback, Key? key})
       : _title = title,
-        _width = width,
+        _width = width??= double.infinity,
         _voidCallBack = voidCallback,
-        _value = value,
         super(key: key);
   static _WidgetButtonLoadingState? of(BuildContext context) => context.findAncestorRenderObjectOfType();
 
-  static void startLoading() async {
-    return await _state._startLoading();
+  static void startLoading() {
+    return  _state._startLoading();
   }
 
   static void deactivateLoading() {
     return _state._deactivateLoading();
   }
 
+  static void loadingDone(){
+    return _state._loadingDone();
+  }
   @override
   _WidgetButtonLoadingState createState() => _WidgetButtonLoadingState();
 }
@@ -41,13 +43,14 @@ class _WidgetButtonLoadingState extends State<WidgetButtonLoading> with SingleTi
 
   double _initWidth = 0.0;
 
+  final double _minWidth = 80;
+
 
   @override
   void initState() {
     super.initState();
     _state = this;
-    widget._width ??= double.maxFinite;
-    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 2))..addListener(_listen);
+    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 1200))..addListener(_listen);
   }
 
   @override
@@ -58,23 +61,23 @@ class _WidgetButtonLoadingState extends State<WidgetButtonLoading> with SingleTi
   }
 
   void _listen() {
-    widget._width = _initWidth - (_initWidth - 50) * _controller.value;
+    widget._width = _initWidth - (_initWidth - _minWidth) * _controller.value;
     setState(() {});
   }
 
-  Future<void> _startLoading() async {
+  void _startLoading() {
     if (mounted) {
       final renderBox = _buttonKey.currentContext?.findAncestorRenderObjectOfType() as RenderBox;
       _initWidth = renderBox.size.width;
-      widget._value = LoadingValue.start;
+      WidgetButtonLoading._value = LoadingValue.start;
       setState(() {});
       _controller.forward();
     }
   }
 
-  Future<void> _loadingDone() async {
+  void _loadingDone() async {
     if (mounted) {
-      widget._value = LoadingValue.done;
+      WidgetButtonLoading._value = LoadingValue.done;
       setState(() {});
     }
   }
@@ -92,11 +95,12 @@ class _WidgetButtonLoadingState extends State<WidgetButtonLoading> with SingleTi
 
   @override
   Widget build(BuildContext context) {
-    return WidgetButton(
+    return
+      WidgetButton(
       width: widget._width,
-      child: widget._value == LoadingValue.none
+      child: WidgetButtonLoading._value == LoadingValue.none
           ? Text(widget._title)
-          : widget._value == LoadingValue.start
+          : WidgetButtonLoading._value == LoadingValue.start
               ? const CircularProgressIndicator(
                   color: AppTheme.unCheckColor,
                   strokeWidth: 2,
